@@ -13,14 +13,13 @@ import { CurrentLocation, Search, Sunrise, Sunset } from "tabler-icons-react";
 import "../App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import Forecast from "./forecast";
 import Dailyly from "../features/daily";
 import Hourly from "../features/hourly";
 
 export default function Weather() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState<any>(null);
-  const apiKey = "be15aafdef944c3511689014c2819067";
+  const apiKey = import.meta.env.VITE_API_KEY;
   const [triggerLoad, setTriggerLoad] = useState(false);
   const [keyPress, setKeyPress] = useState("");
   const [darkMode, setDarkMode] = useState(false);
@@ -87,7 +86,7 @@ export default function Weather() {
     };
 
     setTriggerLoad(false);
-    getLocation(); // Get user's location on component mount
+    getLocation();
   }, [triggerLoad]);
 
   const handleClick = () => {
@@ -106,10 +105,10 @@ export default function Weather() {
   const formatTime = (unixTimestamp: number) => {
     const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
     return date.toLocaleTimeString("en-GB", {
-      // Specify locale and options here
+      
       hour: "2-digit",
       minute: "2-digit",
-      hour12: false, // 24-hour format
+      hour12: false, 
     });
   };
 
@@ -136,7 +135,7 @@ export default function Weather() {
       );
     };
 
-    updateDate(); // Set initial date
+    updateDate();
 
     const timerId = setInterval(updateDate, 86400000); 
 

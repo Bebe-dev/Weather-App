@@ -4,11 +4,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function Dailyly({ city, triggerLoad }: any) {
-  const apiKey = "be15aafdef944c3511689014c2819067"; // Replace with your OpenWeather API key
+  const apiKey = import.meta.env.VITE_API_KEY; 
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
   const [dailyForecasts, setDailyForecasts] = useState([]);
-  //const [dailyTrigger, setDailyTrigger] = useState(false)
 
   const fetchWeatherByLocation = async (
     latitude: number,
@@ -54,7 +53,7 @@ export default function Dailyly({ city, triggerLoad }: any) {
         axios
           .get(apiUrl)
           .then((response) => {
-            // Extract the list of forecasts for each 3-hour interval
+           
             const forecasts = response.data.list;
             const dailyForecast: any = [];
     
@@ -106,7 +105,7 @@ export default function Dailyly({ city, triggerLoad }: any) {
     };
 
     //setDailyTrigger(false)
-    getLocation(); // Get user's location on component mount
+    getLocation();
   }, [triggerLoad]);
 
   return (

@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function Hourly({ city, triggerLoad }: any) {
   const [hourlyForecasts, setHourlyForecasts] = useState([]);
-  const apiKey = "be15aafdef944c3511689014c2819067";
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   const fetchWeatherByLocation = async (
     latitude: number,
@@ -49,7 +49,7 @@ export default function Hourly({ city, triggerLoad }: any) {
       console.error("Error fetching weather data:", error);
     }
   };
-  //console.log(triggerLoad)
+ 
   const fetchData = async () => {
     if(city){
         try {
@@ -111,7 +111,7 @@ export default function Hourly({ city, triggerLoad }: any) {
       }
     };
 
-    getLocation(); // Get user's location on component mount
+    getLocation(); 
   }, [triggerLoad]);
 
   return (
@@ -135,18 +135,7 @@ export default function Hourly({ city, triggerLoad }: any) {
           );
         })}
       </Box>
-      {/* <Box bgColor="#D9D9D9" borderRadius="2xl" padding="8">
-        <p>Hourly Forecast:</p>
-
-          <div className="bg-gradient-to-b from-[#443D64] to-[#6582C600] px-3 py-2 rounded-3xl">
-            <p>12:00</p>
-            <img src="" alt="" />
-            <p>26 C</p>
-            <img src="" alt="" />
-            <p>3km/h</p>
-          </div>
-        </div>
-      </Box> */}
+     
     </div>
   );
 }
