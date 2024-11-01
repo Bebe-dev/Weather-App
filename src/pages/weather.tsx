@@ -135,6 +135,7 @@ export default function Weather() {
       );
     };
 
+    
     updateDate();
 
     const timerId = setInterval(updateDate, 86400000); 
