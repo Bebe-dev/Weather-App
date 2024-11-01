@@ -16,4 +16,4 @@ I was able to practice consuming API after a while. Using Axios made that quite 
 
 ## Links
   - GitHub Link - [GitHub URL](https://github.com/Bebe-dev/Weather-App)
-  - Live link - [Live site URL]() 
+  - Live link - [Live site URL](https://sunny-froyo-2942d8.netlify.app/) 

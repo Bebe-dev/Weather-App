@@ -103,7 +103,7 @@ export default function Weather() {
   //  TIME CODE
 
   const formatTime = (unixTimestamp: number) => {
-    const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
+    const date = new Date(unixTimestamp * 1000); 
     return date.toLocaleTimeString("en-GB", {
       
       hour: "2-digit",
@@ -111,14 +111,6 @@ export default function Weather() {
       hour12: false, 
     });
   };
-
-  const currentDateTime = new Date();
-
-  const currentTime = currentDateTime.toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false, 
-  });
 
   //   DATE CODE
   const [formattedDate, setFormattedDate] = useState<string>("");
@@ -191,7 +183,7 @@ export default function Weather() {
         <div className="flex flex-col md:flex-row gap-10 my-10">
           <div className="w-[100%] md:w-[40%] bg-[#D9D9D9] dark:bg-[#444444] dark:text-white rounded-2xl text-center shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
             <p className="p-14 text-2xl font-bold">{weatherData.name}</p>
-            <p className="p-4 text-6xl font-bold">{currentTime}</p>
+            <p className="p-4 text-6xl font-bold">{formatTime(weatherData.dt)}</p>
             <p className="text-md">{formattedDate}</p>
           </div>
 
@@ -293,7 +285,6 @@ export default function Weather() {
       )}
 
       {/* THIRD SECTION */}
-      {/* <Forecast city={city} /> */}
       <div className="flex flex-col md:flex-row justify-between gap-10">
         <Dailyly city={keyPress} triggerLoad={triggerLoad} />
         <Hourly city={keyPress} triggerLoad={triggerLoad} />
