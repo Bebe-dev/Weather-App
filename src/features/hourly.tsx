@@ -115,7 +115,7 @@ export default function Hourly({ city, triggerLoad }: any) {
   }, [triggerLoad]);
 
   return (
-    <div className="w-[100%] md:w-[70%] shadow-[10px_10px_20px_rgba(0,0,0,0.5)] bg-[#D9D9D9] rounded-2xl p-8 font-bold dark:bg-[#444444] dark:text-white">
+    <div className="w-[100%] md:w-[50%] shadow-[10px_10px_20px_rgba(0,0,0,0.5)] bg-[#D9D9D9] rounded-2xl p-8 font-bold dark:bg-[#444444] dark:text-white">
       <p className="text-2xl text-center mb-4">Hourly Forecast:</p>
       <Box display="flex">
         {hourlyForecasts.map((hourForecast: any, index) => {

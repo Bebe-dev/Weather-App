@@ -187,7 +187,7 @@ export default function Weather() {
             <p className="text-md">{formattedDate}</p>
           </div>
 
-          <div className="shadow-[10px_10px_20px_rgba(0,0,0,0.5)] flex justify-between items-center w-[100%] md:w-[60%] bg-[#D9D9D9] rounded-2xl p-8 color-[#292929] dark:bg-[#444444] dark:text-white">
+          <div className="shadow-[10px_10px_20px_rgba(0,0,0,0.5)] flex flex-col md:flex-row justify-between items-center w-[100%] md:w-[60%] bg-[#D9D9D9] rounded-2xl p-8 color-[#292929] dark:bg-[#444444] dark:text-white">
             <div>
               <p className="text-6xl font-bold">
                 {Math.round(weatherData.main.temp)}°C
