@@ -36,7 +36,7 @@ export default function Weather() {
     if (city) {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`,
         );
         setWeatherData(response.data);
       } catch (error) {
@@ -54,11 +54,11 @@ export default function Weather() {
   useEffect(() => {
     const fetchWeatherByLocation = async (
       latitude: number,
-      longitude: number
+      longitude: number,
     ) => {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`,
         );
         setWeatherData(response.data);
 
@@ -78,7 +78,7 @@ export default function Weather() {
           },
           (error) => {
             console.error("Error getting location:", error);
-          }
+          },
         );
       } else {
         console.error("Geolocation is not supported by this browser.");
@@ -103,12 +103,11 @@ export default function Weather() {
   //  TIME CODE
 
   const formatTime = (unixTimestamp: number) => {
-    const date = new Date(unixTimestamp * 1000); 
+    const date = new Date(unixTimestamp * 1000);
     return date.toLocaleTimeString("en-GB", {
-      
       hour: "2-digit",
       minute: "2-digit",
-      hour12: false, 
+      hour12: false,
     });
   };
 
@@ -123,14 +122,13 @@ export default function Weather() {
           weekday: "long",
           day: "2-digit",
           month: "short",
-        })
+        }),
       );
     };
 
-    
     updateDate();
 
-    const timerId = setInterval(updateDate, 86400000); 
+    const timerId = setInterval(updateDate, 86400000);
 
     return () => clearInterval(timerId);
   }, []);
@@ -165,13 +163,14 @@ export default function Weather() {
         <Button
           leftIcon={<CurrentLocation />}
           padding="6"
-          px="10"
+          px="14"
+          whiteSpace="normal"
           borderRadius="3xl"
           bgColor="#4CBB17"
           color="#FFFFFF"
           onClick={handleClick}
-          _hover={{bgColor: "black"}}
-          _active={{bgColor: "#4CBB17"}}
+          _hover={{ bgColor: "#143505ff" }}
+          _active={{ bgColor: "#4CBB17" }}
         >
           Current Location
         </Button>
@@ -183,7 +182,9 @@ export default function Weather() {
         <div className="flex flex-col md:flex-row gap-10 my-10">
           <div className="w-[100%] md:w-[40%] bg-[#D9D9D9] dark:bg-[#444444] dark:text-white rounded-2xl text-center shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
             <p className="p-14 text-2xl font-bold">{weatherData.name}</p>
-            <p className="p-4 text-6xl font-bold">{formatTime(weatherData.dt)}</p>
+            <p className="p-4 text-6xl font-bold">
+              {formatTime(weatherData.dt)}
+            </p>
             <p className="text-md">{formattedDate}</p>
           </div>
 
