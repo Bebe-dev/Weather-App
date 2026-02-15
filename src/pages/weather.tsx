@@ -140,12 +140,12 @@ export default function Weather() {
       }`}
     >
       {/* FIRST SECTION */}
-      <Flex gap="8">
+      <Flex width="100%" style={{paddingBottom: "14px"}} direction={{base: "column", md: "row"}} gap={{base:"3", md:"8"}}>
         <div className="hidden md:block">
           <Switch onChange={toggleDarkMode} />
           <p>Light mode</p>
         </div>
-        <Spacer />
+        <Spacer display={{base: "none", md:"block"}} />
         <InputGroup>
           <InputLeftElement>
             <Search />
@@ -156,6 +156,8 @@ export default function Weather() {
             value={city}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
+            
+            style={{border:"3px solid #466173", background: "white"}}
           />
         </InputGroup>
         <Spacer />
@@ -180,8 +182,8 @@ export default function Weather() {
 
       {weatherData && (
         <div className="flex flex-col md:flex-row gap-10 my-10">
-          <div className="w-[100%] md:w-[40%] bg-[#D9D9D9] dark:bg-[#444444] dark:text-white rounded-2xl text-center shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
-            <p className="p-14 text-2xl font-bold">{weatherData.name}</p>
+          <div className="w-[100%] md:w-[40%] pb-6 bg-[#D9D9D9] dark:bg-[#444444] dark:text-white rounded-2xl text-center shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
+            <p className="p-10 text-2xl font-bold">{weatherData.name}</p>
             <p className="p-4 text-6xl font-bold">
               {formatTime(weatherData.dt)}
             </p>
