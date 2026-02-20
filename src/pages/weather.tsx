@@ -23,7 +23,8 @@ export default function Weather() {
   const [triggerLoad, setTriggerLoad] = useState(false);
   const [keyPress, setKeyPress] = useState("");
   const [darkMode, setDarkMode] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [currentLoading, setCurentLoading] = useState(false);
   const handleInputChange = (e: any) => {
     setCity(e.target.value);
   };
@@ -33,6 +34,7 @@ export default function Weather() {
   };
 
   const fetchData = async () => {
+    setLoading(true);
     if (city) {
       try {
         const response = await axios.get(
@@ -43,6 +45,7 @@ export default function Weather() {
         console.log(error);
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -57,6 +60,7 @@ export default function Weather() {
       longitude: number,
     ) => {
       try {
+        setCurentLoading(true);
         const response = await axios.get(
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`,
         );
@@ -67,6 +71,7 @@ export default function Weather() {
       } catch (error) {
         console.error("Error fetching weather data:", error);
       }
+      setCurentLoading(false);
     };
 
     const getLocation = () => {
@@ -85,8 +90,10 @@ export default function Weather() {
       }
     };
 
+    
     setTriggerLoad(false);
     getLocation();
+    
   }, [triggerLoad]);
 
   const handleClick = () => {
@@ -139,13 +146,24 @@ export default function Weather() {
         darkMode && "dark"
       }`}
     >
+      {loading && (
+        <div className="flex justify-center items-center py-10">
+          <div className="w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
       {/* FIRST SECTION */}
-      <Flex width="100%" style={{paddingBottom: "14px"}} direction={{base: "column", md: "row"}} gap={{base:"3", md:"8"}}>
+      <Flex
+        width="100%"
+        style={{ paddingBottom: "14px" }}
+        direction={{ base: "column", md: "row" }}
+        gap={{ base: "3", md: "8" }}
+      >
         <div className="hidden md:block">
           <Switch onChange={toggleDarkMode} />
           <p>Light mode</p>
         </div>
-        <Spacer display={{base: "none", md:"block"}} />
+        <Spacer display={{ base: "none", md: "block" }} />
         <InputGroup>
           <InputLeftElement>
             <Search />
@@ -156,8 +174,7 @@ export default function Weather() {
             value={city}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
-            
-            style={{border:"3px solid #466173", background: "white"}}
+            style={{ border: "3px solid #466173", background: "white" }}
           />
         </InputGroup>
         <Spacer />
@@ -171,10 +188,10 @@ export default function Weather() {
           bgColor="#4CBB17"
           color="#FFFFFF"
           onClick={handleClick}
-          _hover={{ bgColor: "#143505ff" }}
+          _hover={{ bgColor: "#3d9415" }}
           _active={{ bgColor: "#4CBB17" }}
         >
-          Current Location
+          {currentLoading ? "Loading..." : "Current Location"}
         </Button>
       </Flex>
 
